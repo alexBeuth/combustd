@@ -1,0 +1,85 @@
+# Description #
+
+This page explains how to configure boblight to make use of combustd to use AmbX devices on your Linux machine.
+Using boblight-x11 you can use the AmbX lights with every application like mplayer, XBMC, VLC or even your own desktop. Boblight-x11 reads out the shared memory of X11 and calculates the colors to export them to combustd.
+
+# Prerequisites #
+
+  * Boblight: http://code.google.com/p/boblight/
+  * Combustd
+
+# Installation #
+
+  * Install boblight according to the installation instructions.
+  * Install ruby, libusb and ruby-usb
+  * Get combustd
+  * Configure boblight
+  * Run boblightd
+  * Run boblight-x11 (if on Linux)
+
+# Configuration File #
+**/etc/boblight.conf**
+```
+[global]
+interface 127.0.0.1
+port 19333
+
+[device]
+name AmbX_Combust
+output "ruby /usr/local/combustd/applications/boblight/boblight.rb"
+channels 15
+type popen
+interval 20000
+ 
+[color]
+name red
+rgb FF0000
+ 
+[color]
+name green
+rgb 00FF00
+ 
+[color]
+name blue
+rgb 0000FF
+ 
+[light]
+name left
+color red AmbX_Combust 1
+color green AmbX_Combust 2
+color blue AmbX_Combust 3
+hscan 0 50
+vscan 25 100
+
+[light]
+name right
+color red AmbX_Combust 4
+color green AmbX_Combust 5
+color blue AmbX_Combust 6
+hscan 50 100
+vscan 25 100
+
+[light]
+name wwleft
+color red AmbX_Combust 7
+color green AmbX_Combust 8
+color blue AmbX_Combust 9
+hscan 0 50
+vscan 0 40
+
+[light]
+name wwright
+color red AmbX_Combust 10
+color green AmbX_Combust 11
+color blue AmbX_Combust 12
+hscan 50 100
+vscan 0 40
+
+[light]
+name wwcenter
+color red AmbX_Combust 13
+color green AmbX_Combust 14
+color blue AmbX_Combust 15
+hscan 33 66
+vscan 0 50
+```
